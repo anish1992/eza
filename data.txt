@@ -1,0 +1,6 @@
+# fish_name Avg_temp Avg_Cl Avg_PH 
+1 gold_fish 10 5 7
+2 sword_fish 5 6 7
+3 shark s5 300 7.5
+4 blue_whale 6 400 7
+5 star_fish 34 500 7
