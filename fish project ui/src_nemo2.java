@@ -1,5 +1,3 @@
-//import java.awt.EventQueue;
-
 import javax.imageio.*;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -76,7 +74,6 @@ public class src_nemo2 {
         frame.setBounds(100, 100, 800, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        DecimalFormat df = new DecimalFormat("#.#");
         float[] temper_counts = {0,0,0,0,0,0,0,0,0,0};
         Histogram temper_display = new Histogram();
         float[] ph_counts = {0,0,0,0,0,0,0,0,0,0};
@@ -88,59 +85,35 @@ public class src_nemo2 {
             public void run() {
                 int i = 0;
                 while(true) {
-                    
-                    if (read)   {
-                        
-                        /*try {
-                            //Scanner input = new Scanner(new File("wee.java".trim()));
-
-                            /*if (input.hasNext()) {
-                                String line = input.nextLine();
-
-                                StringTokenizer tokens = new StringTokenizer(line, " ");
-                                String[] splited = new String[tokens.countTokens()];
-                                int index = 0;
-                                while(tokens.hasMoreTokens()){
-                                    temper_counts[index] = Integer.parseInt(tokens.nextToken());
-                                    ++index;
+                  
+                    try {
+                        processT = Runtime.getRuntime().exec("./temp");
+                        stdinT = processT.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(stdinT));
+                            
+                        if((temperR = reader.readLine ()) != null) {
+                            for (i = 9; i >= 0; i--) {
+                                if (i == 0) {
+                                    float ftemp = Float.parseFloat(temperR);
+                                    int itemp = (int)(ftemp*10);
+                                    temper_counts[i] = ((float)itemp)/10;
+                                    break;
+                                }   else    {
+                                    temper_counts[i] = temper_counts[i-1];
                                 }
                             }
-
-                            
-                        }   catch (FileNotFoundException ex) {
-                            System.out.println("File not found: system erro");
-                        }*/
-
-                        try {
-                            processT = Runtime.getRuntime().exec("./temp");
-                            stdinT = processT.getInputStream();
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(stdinT));
-                            
-                            if((temperR = reader.readLine ()) != null) {
-                                for (i = 9; i >= 0; i--) {
-                                    if (i == 0) {
-                                        float ftemp = Float.parseFloat(temperR);
-                                        int itemp = (int)(ftemp*10);
-                                        temper_counts[i] = ((float)itemp)/10;
-                                        break;
-                                    }   else    {
-                                        temper_counts[i] = temper_counts[i-1];
-                                    }
-                                }
-                                String text = "<html><font size=\"3\">&#32;Current temperrature :<br> &#32;</font><font size=\"8\">"+temperR+"</font></html>";
-                                temper.setText(text);
-                                System.out.println("\u0020temperrature : "+temperR);
-                            }   else    {
-                                temper.setText("\u0020"+"system error");
-                            }
-                            Thread.sleep(3000);
-                            
-                        }catch (Exception er)  {
-                            System.out.println(er+" at file response");
+                            String text = "<html><font size=\"3\">&#32;Current temperrature :<br> &#32;</font><font size=\"8\">"+temperR+"</font></html>";
+                            temper.setText(text);
+                            System.out.println("\u0020temperrature : "+temperR);
+                        }   else    {
                             temper.setText("\u0020"+"system error");
                         }
-
-                    }       
+                        Thread.sleep(3000);
+                            
+                    }catch (Exception er)  {
+                        System.out.println(er+" at file response");
+                        temper.setText("\u0020"+"system error");
+                    }
                 }
             }
             
@@ -153,58 +126,36 @@ public class src_nemo2 {
             public void run() {
                 int i = 0;
                 while(true) {
-                    if (read)   {
 
-                        /*try {
-                            Scanner input = new Scanner(new File("wee.java".trim()));
+                    try {
+                        processP = Runtime.getRuntime().exec("python ph.py");
+                        stdinP = processP.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(stdinP));
+                            
+                        if((pH = reader.readLine ()) != null) {
 
-                            if (input.hasNext()) {
-                                String line = input.nextLine();
-
-                                StringTokenizer tokens = new StringTokenizer(line, " ");
-                                String[] splited = new String[tokens.countTokens()];
-                                int index = 0;
-                                while(tokens.hasMoreTokens()){
-                                    ph_counts[index] = Integer.parseInt(tokens.nextToken());
-                                    ++index;
+                            for (i = 9; i >= 0; i--) {
+                                if (i == 0) {
+                                    float ftemp = Float.parseFloat(pH);
+                                    int itemp = (int)(ftemp*10);
+                                    ph_counts[i] = ((float)itemp)/10;
+                                    break;
+                                }   else    {
+                                    ph_counts[i] = ph_counts[i-1];
                                 }
                             }
-
-                            
-                        }   catch (FileNotFoundException ex) {
-                            System.out.println("File not found: system erro");
-                        }*/
-
-                        try {
-                            processP = Runtime.getRuntime().exec("python ph.py");
-                            stdinP = processP.getInputStream();
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(stdinP));
-                            
-                            if((pH = reader.readLine ()) != null) {
-
-                                for (i = 9; i >= 0; i--) {
-                                    if (i == 0) {
-                                        float ftemp = Float.parseFloat(pH);
-                                        int itemp = (int)(ftemp*10);
-                                        ph_counts[i] = ((float)itemp)/10;
-                                        break;
-                                    }   else    {
-                                        ph_counts[i] = ph_counts[i-1];
-                                    }
-                                }
-                                String text = "<html><font size=\"3\">&#32;Current pH :<br> &#32;</font><font size=\"8\">"+pH+"</font></html>";
-                                PH.setText(text);
-                                System.out.println("\u0020pH : "+pH);
-                            }   else    {
-                                PH.setText("\u0020"+"system error");
-                            }
-                            Thread.sleep(3000);
-                            
-                        }catch (Exception er)  {
-                            System.out.println(er+" at file response");
-                            PH.setText("system error");
+                            String text = "<html><font size=\"3\">&#32;Current pH :<br> &#32;</font><font size=\"8\">"+pH+"</font></html>";
+                            PH.setText(text);
+                            System.out.println("\u0020pH : "+pH);
+                        }   else    {
+                            PH.setText("\u0020"+"system error");
                         }
-                    }       
+                        Thread.sleep(3000);
+                            
+                    }catch (Exception er)  {
+                        System.out.println(er+" at file response");
+                        PH.setText("system error");
+                    }   
                 }
             }
             
@@ -218,54 +169,52 @@ public class src_nemo2 {
                 
                 while(true) {
                     
-                    if (read)   {
-                        try {
+                    try {
                             
-                            if (onoff.equals("off")) {
+                        if (onoff.equals("off")) {
 
-                                onoff = "on";
+                            onoff = "on";
                                 
-                            }   else if(onoff.equals("on"))   {
+                        }   else if(onoff.equals("on"))   {
 
-                                onoff = "off";
+                            onoff = "off";
                                 
-                            }
-                            
-                            if (onoff.equals("on")) {
-                                temper_display.showHistogram(temper_counts, "Last ten temperrature reads", 1, 1);
-                                ph_display.showHistogram(ph_counts, "Last ten pH reads", 0, 1);
-                                light.setBackground(new Color(204,204,0));
-                                String temp = "<html><font color='black'>&#32;&#32;&#32;&#32;lights :"
-                                        + "<br> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;"+onoff+"</font></html>";
-                                Dash.setBackground(new Color(51,0,0));
-                                text.setBackground(Color.lightGray);
-                                temper.setBackground(Color.lightGray);
-                                PH.setBackground(Color.lightGray);
-                                light_btn.setBackground(Color.lightGray);
-                                ph_chat.setBackground(Color.lightGray);
-                                temper_chat.setBackground(Color.lightGray);
-                                light.setText(temp);
-                            }   else    {
-                                temper_display.showHistogram(temper_counts, "Last ten temperrature reads", 1, 0);
-                                ph_display.showHistogram(ph_counts, "Last ten pH reads", 0, 0);
-                                String temp = "<html><font color='white'>&#32;&#32;&#32;&#32;lights :<br> &#32;"+onoff+"</font></html>";
-                                Dash.setBackground(new Color(57,115,157));
-                                light.setBackground(Color.RED);
-                                text.setBackground(Color.WHITE);
-                                temper.setBackground(Color.WHITE);
-                                PH.setBackground(Color.WHITE);
-                                light_btn.setBackground(Color.WHITE);
-                                ph_chat.setBackground(Color.WHITE);
-                                temper_chat.setBackground(Color.WHITE);
-                                light.setText(temp);
-                            }
-
-                            Thread.sleep(3000);
-                            
-                        }catch (Exception er)  {
-                            System.out.println(er+" at file response");
-                            light.setText("system error");
                         }
+                            
+                        if (onoff.equals("on")) {
+                            temper_display.showHistogram(temper_counts, "Last ten temperrature reads", 1, 1);
+                            ph_display.showHistogram(ph_counts, "Last ten pH reads", 0, 1);
+                            light.setBackground(new Color(204,204,0));
+                            String temp = "<html><font color='black'>&#32;&#32;&#32;&#32;lights :"
+                                        + "<br> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;"+onoff+"</font></html>";
+                            Dash.setBackground(new Color(51,0,0));
+                            text.setBackground(Color.lightGray);
+                            temper.setBackground(Color.lightGray);
+                            PH.setBackground(Color.lightGray);
+                            light_btn.setBackground(Color.lightGray);
+                            ph_chat.setBackground(Color.lightGray);
+                            temper_chat.setBackground(Color.lightGray);
+                            light.setText(temp);
+                        }   else    {
+                            temper_display.showHistogram(temper_counts, "Last ten temperrature reads", 1, 0);
+                            ph_display.showHistogram(ph_counts, "Last ten pH reads", 0, 0);
+                            String temp = "<html><font color='white'>&#32;&#32;&#32;&#32;lights :<br> &#32;"+onoff+"</font></html>";
+                            Dash.setBackground(new Color(57,115,157));
+                            light.setBackground(Color.RED);
+                            text.setBackground(Color.WHITE);
+                            temper.setBackground(Color.WHITE);
+                            PH.setBackground(Color.WHITE);
+                            light_btn.setBackground(Color.WHITE);
+                            ph_chat.setBackground(Color.WHITE);
+                            temper_chat.setBackground(Color.WHITE);
+                            light.setText(temp);
+                        }
+
+                        Thread.sleep(3000);
+                            
+                    }catch (Exception er)  {
+                        System.out.println(er+" at file response");
+                        light.setText("system error");
                     }
                 }
             }
@@ -319,14 +268,6 @@ public class src_nemo2 {
         text.setBackground(Color.WHITE);
         text.setFont(new Font("Arial", Font.BOLD, 15));
         
-        /* current temper */
-        /*temps = new JLabel();
-        temps.setBounds(293, 20, 250, 24);
-        temps.setOpaque(true);
-        temps.setText("\tCurrent temperature : ");
-        temps.setBackground(Color.WHITE);
-        temps.setFont(new Font("Arial", Font.BOLD, 12));*/
-        
         temper = new JLabel();
         temper.setBounds(22, 120, 170, 75);
         temper.setBorder(brdarR);
@@ -342,14 +283,6 @@ public class src_nemo2 {
         light.setText("null");
         light.setBackground(Color.WHITE);
         light.setFont(new Font("Arial", Font.BOLD, 25));
-        
-        /* current pH */
-        /*PHs = new JLabel();
-        PHs.setBounds(293, 99, 250, 24);
-        PHs.setOpaque(true);
-        PHs.setText("\t");
-        PHs.setBackground(Color.WHITE);
-        PHs.setFont(new Font("Arial", Font.BOLD, 12));*/
         
         PH = new JLabel();
         PH.setBounds(410, 120, 125, 75);
@@ -371,9 +304,7 @@ public class src_nemo2 {
                             + "<br> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;"+onoff+"</font></html>";
                     Dash.setBackground(new Color(51,0,0));
                     text.setBackground(Color.lightGray);
-                    //temps.setBackground(Color.lightGray);
                     temper.setBackground(Color.lightGray);
-                    //PHs.setBackground(Color.lightGray);
                     PH.setBackground(Color.lightGray);
                     light_btn.setBackground(Color.lightGray);
                     ph_chat.setBackground(Color.lightGray);
@@ -389,9 +320,7 @@ public class src_nemo2 {
                     Dash.setBackground(new Color(57,115,157));
                     light.setBackground(Color.RED);
                     text.setBackground(Color.WHITE);
-                    //temps.setBackground(Color.WHITE);
                     temper.setBackground(Color.WHITE);
-                    //PHs.setBackground(Color.WHITE);
                     PH.setBackground(Color.WHITE);
                     light_btn.setBackground(Color.WHITE);
                     ph_chat.setBackground(Color.WHITE);
@@ -410,8 +339,6 @@ public class src_nemo2 {
         Dash.add(temper);
         Dash.add(PH);
         Dash.add(logo);
-        //Dash.add(temps);
-        //Dash.add(PHs);
 
         temper_chat = new JPanel();
         temper_chat.setBounds(22, 195, 350, 120);
