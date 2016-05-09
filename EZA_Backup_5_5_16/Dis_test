@@ -1,0 +1,22 @@
+#!/usr/bin/python 
+
+import io # used to create file streams
+import os 
+import time
+import datetime
+
+def main():	
+	dis_time = 1000 # time in ms 
+	ideal = 10.500
+	time_start = datetime.now().time()
+	os.system('./setGPIO 6 1')
+	time.sleep(dis_time)
+	os.system('./setGPIO 6 0')
+	time_stop = datetime.now().time()
+	print(time_start)
+	print(time_stop)
+	print('Start Time: ', time_start)
+	print('Stop Time: ', time_stop)
+        
+if __name__ == '__main__':
+    main()

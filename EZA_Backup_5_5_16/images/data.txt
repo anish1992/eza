@@ -1,0 +1,41 @@
+# fish_name Avg_temp Avg_PH Avg_Cl 
+1 african_cichlids 78 8.2 84
+2 new_world_cichlids 75 7.4 100
+3 firemouth_cichlid 72.5 6.75 100
+4 rainbow_cichlid 74.5 7.25 100
+5 black_convict_cichlid 70.5 7.25 100
+6 red_devil_cichlid 74.5 7.00 100
+7 red_parrot 76.0 6.75 100
+8 freshwater_angelfish 78.5 6.4 100
+9 barb 76.5 6.5 100
+10 betta 80.5 7.0 100
+11 Zebra_Danio 69.5 6.75 100
+12 celestial_pearl_danio 76.0 7.0 100
+13 discus 82.5 6.8 100
+14 gold_fish 70 7.0 100 
+15 guppy 73.0 6.75 100
+16 molly 75.0 7.40 100
+17 platy 70.5 7.6 100
+18 rio-negro_pleco 76.5 6.95 100
+19 trinidad_pleco 77.0 6.75 100
+20 royal_pleco 76.5 6.95 100
+21 pitbull_pleco 73.0 7.0 100
+22 bushy_nose_pleco 76.5 6.95 100
+23 boesemani_rainbow 74.5 7.5 100
+24 pseudomugil_rainbow 74.5 8.0 100
+25 rasbora 74.5 6.25 100
+26 swordtail 73.0 7.65 100
+27 neon_tetra 73.0 6.0 100
+28 rummynose_tetra 74.5 6.25 100
+29 x-ray_pristella_tetra 73.0 7.15 100
+30 glowlight_tetra 74.5 6.25 100
+31 penguin_tetra 73.0 7.15 100
+32 buenos_aires_tetra 73.0 7.65 100
+33 black_skirt_tetra 77.0 6.75 100
+34 black_phantom_tetra 77.0 6.75 100
+35 emperor_tetra 74.5 7.0 100
+36 splashing_tetra 76.0 6.5 100
+
+
+
+

@@ -1,0 +1,17 @@
+# fish_name Avg_temp Avg_PH Avg_Cl 
+1 african_cichlids 78 8.2 84
+2 new_world_cichlids 75 7.4 100
+3 firemouth_cichlid 72.5 6.75 100
+4 rainbow_cichlid 74.5 7.25 100
+5 black_convict_cichlid 70.5 7.25 100
+6 red_devil_cichlid 74.5 7.00 100
+7 red_parrot 76.0 6.75 100
+8 freshwater_anglefish 78.5 6.4 100
+9 barb 76.5 6.5 100
+10 betta 80.5 7.0 100
+10 Zebra_Danio 69.5 6.75 100
+11 celestial_pearl_danio 76.0 7.0 100
+
+
+
+
