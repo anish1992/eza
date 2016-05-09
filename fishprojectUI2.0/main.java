@@ -2251,8 +2251,8 @@ public class main extends JFrame {
                     
                     Thread.sleep(1000);
                     String text ="";
-                    String line;
-                    Process process_read2;
+
+                    Process process_read;
                     
                     int i = 0;
                     // removing panel
@@ -2266,17 +2266,13 @@ public class main extends JFrame {
                     Deck.revalidate();
 
                     while (true) {
-                        try {
-                            process_read2 = Runtime.getRuntime().exec("./temp");
-                            BufferedReader in = new BufferedReader(new InputStreamReader(process_read2.getInputStream()));
-                            temp = Float.parseFloat(in.readLine());
-                            process_read2 = Runtime.getRuntime().exec("python ph.py");
-                            in = new BufferedReader(new InputStreamReader(process_read2.getInputStream()));
-                            ph = Float.parseFloat(in.readLine());
-                        }   catch (Exception e) {
-
-                            e.printStackTrace();
-                        }
+                        
+                        /*process_read = Runtime.getRuntime().exec("./temp");
+                        BufferedReader in = new BufferedReader(new InputStreamReader(process_read.getInputStream()));
+                        temp = Float.parseFloat(in.readLine());
+                        process_read = Runtime.getRuntime().exec("python ph.py");
+                        in = new BufferedReader(new InputStreamReader(process_read.getInputStream()));
+                        ph = Float.parseFloat(in.readLine());*/
                         
                         Thread.sleep(3000);
                         if(LocalDateTime.now().getHour() < 12)	{
@@ -2373,12 +2369,11 @@ public class main extends JFrame {
 
                         if ((line = in.readLine()) != null) {
                             current_temp = Float.parseFloat(line);
-                            //current_temp = (float) ((float) current_temp * 1.800 + 32.0);
                             /*
     `                        * tempratuer tap Warning do not remove
                              * if removed reading will not update
                              */
-							//temp = current_temp; // 
+							temp = 23.9f;//current_temp; // 
                         }
 
                         /*
@@ -2404,7 +2399,7 @@ public class main extends JFrame {
             `                        * tempratuer tap Warning do not remove
                                      * if removed reading will not update
                                      */
-                                    temp = current_temp; // 
+                                    temp = 23.9f;// current_temp; // 
                                 }
                             }
                         }
@@ -2429,7 +2424,7 @@ public class main extends JFrame {
             `                * tempratuer tap Warning do not remove
                              * if removed reading will not update
                              */
-                            //ph = current_ph; // 
+                            ph = 6.8f;//current_ph; // 
                         }
 
                         /*
@@ -2457,7 +2452,8 @@ public class main extends JFrame {
             `                        * tempratuer tap Warning do not remove
                                      * if removed reading will not update
                                      */
-                                    //ph = current_ph; // 
+                                    //System.out.println(""+current_ph);
+                                    ph = 6.8f;//current_ph; // 
                                 }
                             } else {
                                 Runtime.getRuntime().exec("sudo ./setGPIO 13 1"); 
@@ -2480,7 +2476,7 @@ public class main extends JFrame {
             `                        * tempratuer tap Warning do not remove
                                      * if removed reading will not update
                                      */
-                                    //ph = current_ph; // 
+                                    ph = 6.8f;//current_ph; // 
                                 }
                             }
                         }
